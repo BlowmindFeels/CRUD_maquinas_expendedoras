@@ -4,8 +4,10 @@ const app = express();
 
 app.use(express.static("public"));
 
+require("./app/routes/maquina.routes")(app);
+
 app.get("/", (req, res) => {
-  res.send("Servidor funcionando 🚀");
+  res.send("Servidor funcionando");
 });
 
 app.listen(3000, () => {
@@ -15,10 +17,14 @@ app.listen(3000, () => {
 const mysql = require("mysql2");
 
 const connection = mysql.createConnection({
-  host: "mysql", // nombre del servicio en docker-compose
-  user: "root",
-  password: "root",
-  database: "maquinas_db"
+  host: "mysql", //nombre del servicio en docker-compose
+  user: "root", //user
+  password: "root", //contraseña
+  database: "maquinas_db"//nombre db
+});
+
+app.get("/", (req, res) => {
+  res.send("API funcionando correctamente");
 });
 
 connection.connect((err) => {

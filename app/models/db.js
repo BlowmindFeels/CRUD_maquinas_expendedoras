@@ -1,16 +1,22 @@
 const mysql = require("mysql");
-const dbConfig = require("../config/db.config");
 
-const connection = mysql.createConnection({
-  host: dbConfig.HOST,
-  user: dbConfig.USER,
-  password: dbConfig.PASSWORD,
-  database: dbConfig.DB
+const pool = mysql.createPool({
+  host: process.env.DB_HOST || "mysql",
+  user: process.env.DB_USER || "root",
+  password: process.env.DB_PASSWORD || "1234",
+  database: process.env.DB_NAME || "maquinas_db",
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
 });
 
-connection.connect(error => {
-  if (error) throw error;
-  console.log("Conectado a MySQL");
+pool.getConnection((err, connection) => {
+  if (err) {
+    console.error("Error inicial conectando a MySQL:", err);
+  } else {
+    console.log("Conectado a MySQL");
+    connection.release();
+  }
 });
 
-module.exports = connection;
+module.exports = pool;

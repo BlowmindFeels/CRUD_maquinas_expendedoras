@@ -11,6 +11,11 @@ services:
     ports:
       - "3306:3306"
 
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      retries: 5
+
   app:
     build: .
     container_name: node_maquinas
@@ -24,3 +29,10 @@ services:
       DB_USER: root
       DB_PASSWORD: 1234
       DB_NAME: maquinas_db
+
+  adminer:
+    image: adminer
+    container_name: adminer_maquinas
+    restart: always
+    ports:
+      - "8080:8080"

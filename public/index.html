@@ -2,41 +2,7 @@
 <html>
 <head>
   <title>Máquinas Expendedoras</title>
-  <style>
-    body {
-      font-family: Arial;
-      padding: 20px;
-      background-color: #f4f4f4;
-    }
-    h1 {
-      text-align: center;
-    }
-    form {
-      margin-bottom: 20px;
-    }
-    input {
-      margin: 5px;
-      padding: 5px;
-    }
-    button {
-      padding: 5px 10px;
-      cursor: pointer;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: white;
-    }
-    th, td {
-      border: 1px solid #ccc;
-      padding: 8px;
-      text-align: center;
-    }
-    th {
-      background: #333;
-      color: white;
-    }
-  </style>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
@@ -64,61 +30,7 @@
   <tbody id="tablaMaquinas"></tbody>
 </table>
 
-<script>
-  const API_URL = "/maquinas";
-
-  document.getElementById("maquinaForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const maquina = {
-      nombre: document.getElementById("nombre").value,
-      ubicacion: document.getElementById("ubicacion").value,
-      capacidad: document.getElementById("capacidad").value,
-      estado: document.getElementById("estado").value
-    };
-
-    await fetch(API_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(maquina)
-    });
-
-    cargarMaquinas();
-    e.target.reset();
-  });
-
-  async function cargarMaquinas() {
-    const res = await fetch(API_URL);
-    const maquinas = await res.json();
-
-    const tabla = document.getElementById("tablaMaquinas");
-    tabla.innerHTML = "";
-
-    maquinas.forEach(m => {
-      tabla.innerHTML += `
-        <tr>
-          <td>${m.id}</td>
-          <td>${m.nombre}</td>
-          <td>${m.ubicacion}</td>
-          <td>${m.capacidad}</td>
-          <td>${m.estado}</td>
-          <td>
-            <button onclick="eliminar(${m.id})">Eliminar</button>
-          </td>
-        </tr>
-      `;
-    });
-  }
-
-  async function eliminar(id) {
-    await fetch(`${API_URL}/${id}`, {
-      method: "DELETE"
-    });
-    cargarMaquinas();
-  }
-
-  cargarMaquinas();
-</script>
+<script src="/js/script.js"></script>
 
 </body>
 </html>
