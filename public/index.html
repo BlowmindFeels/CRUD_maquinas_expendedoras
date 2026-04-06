@@ -1,36 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Máquinas Expendedoras</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+  <div class="app-container">
+    <header class="page-header">
+      <h1>Gestión de Máquinas Expendedoras</h1>
+      <p>Registra, edita y elimina máquinas expendedoras desde una interfaz clara, moderna y optimizada para móviles.</p>
+    </header>
 
-<h1>Gestión de Máquinas Expendedoras</h1>
+    <section class="card">
+      <form id="maquinaForm" class="form-grid">
+        <input type="text" id="nombre" placeholder="Nombre" required>
+        <input type="text" id="ubicacion" placeholder="Ubicación" required>
+        <input type="number" id="capacidad" placeholder="Capacidad" required>
+        <input type="text" id="estado" placeholder="Estado" required>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Agregar</button>
+          <button type="button" id="btnCancelar" class="btn btn-secondary">Cancelar</button>
+        </div>
+      </form>
+    </section>
 
-<form id="maquinaForm">
-  <input type="text" id="nombre" placeholder="Nombre" required>
-  <input type="text" id="ubicacion" placeholder="Ubicación" required>
-  <input type="number" id="capacidad" placeholder="Capacidad" required>
-  <input type="text" id="estado" placeholder="Estado" required>
-  <button type="submit">Agregar</button>
-</form>
+    <section class="card">
+      <div class="caption">Lista de máquinas expendedoras registradas</div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Ubicación</th>
+              <th>Capacidad</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tablaMaquinas"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Nombre</th>
-      <th>Ubicación</th>
-      <th>Capacidad</th>
-      <th>Estado</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody id="tablaMaquinas"></tbody>
-</table>
-
-<script src="/js/script.js"></script>
-
+  <script src="/js/script.js"></script>
 </body>
 </html>
