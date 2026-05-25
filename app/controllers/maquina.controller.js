@@ -43,6 +43,16 @@ exports.update = (req, res) => {
   });
 };
 
+// Actualizar solo el estado
+exports.updateEstado = (req, res) => {
+  const { estado } = req.body;
+  if (!estado) return res.status(400).send({ message: "Estado requerido" });
+  Maquina.updateEstado(req.params.id, estado, (err) => {
+    if (err) res.status(500).send(err);
+    else res.send({ message: "Estado actualizado" });
+  });
+};
+
 // Eliminar máquina
 exports.delete = (req, res) => {
   Maquina.remove(req.params.id, (err, data) => {
