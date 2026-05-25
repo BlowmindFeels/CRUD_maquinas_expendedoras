@@ -7,6 +7,14 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+  <div class="user-bar">
+    <div class="user-bar-info">
+      Bienvenido, <strong id="currentUser"></strong>
+      <span class="badge badge-blue" id="currentRole"></span>
+    </div>
+    <button class="btn btn-secondary btn-small" id="btnLogout">Cerrar sesión</button>
+  </div>
+
   <div class="app-container">
     <header class="page-header">
       <h1>Gestión de Máquinas Expendedoras</h1>
@@ -18,7 +26,17 @@
         <input type="text" id="nombre" placeholder="Nombre" required>
         <input type="text" id="ubicacion" placeholder="Ubicación" required>
         <input type="number" id="capacidad" placeholder="Capacidad" required>
-        <input type="text" id="estado" placeholder="Estado" required>
+        <select id="estado" required>
+          <option value="" disabled selected>Estado</option>
+          <option value="Activa">Activa</option>
+          <option value="Inactiva">Inactiva</option>
+          <option value="Mantenimiento">Mantenimiento</option>
+          <option value="Llena">Llena</option>
+          <option value="Media">Media</option>
+          <option value="Baja">Baja</option>
+          <option value="Crítica">Crítica</option>
+          <option value="Vacía">Vacía</option>
+        </select>
         <div class="form-actions">
           <button type="submit" class="btn btn-primary">Agregar</button>
           <button type="button" id="btnCancelar" class="btn btn-secondary">Cancelar</button>
@@ -36,6 +54,7 @@
               <th>Nombre</th>
               <th>Ubicación</th>
               <th>Capacidad</th>
+              <th>Stock Actual</th>
               <th>Estado</th>
               <th>Acciones</th>
             </tr>

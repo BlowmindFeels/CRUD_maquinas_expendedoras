@@ -1,4 +1,4 @@
-const sql = require("./db");
+const sql = require("../config/db");
 
 const Maquina = function(maquina) {
   this.nombre   = maquina.nombre;
@@ -41,6 +41,13 @@ Maquina.updateById = (id, maquina, result) => {
 
 Maquina.remove = (id, result) => {
   sql.query("DELETE FROM maquinas WHERE id=?", [id], (err, res) => {
+    if (err) { result(err, null); return; }
+    result(null, res);
+  });
+};
+
+Maquina.updateEstado = (id, estado, result) => {
+  sql.query("UPDATE maquinas SET estado=? WHERE id=?", [estado, id], (err, res) => {
     if (err) { result(err, null); return; }
     result(null, res);
   });
